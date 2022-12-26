@@ -23,14 +23,20 @@ async function getContactById(contactId) {
 
 async function removeContact(contactId) {
     const contacts = await listContacts();
-    const updatedContacts = contacts.filter((contacts) => contacts.id !== contactId)
+    const updatedContacts = contacts.filter((contacts) => contacts.id !== contactId);
+    await writeDb(updatedContacts);
 }
 
-function addContact(name, email, phone) {
-    // ...твій код
+async function addContact(name, email, phone) {
+    const newContact = { name, email, phone }
+    const db = await listContacts();
+    db.push(newContact);
+    await writeDb(db);
 }
 
 module.exports = {
     listContacts,
     getContactById,
+    removeContact,
+    addContact,
 }
