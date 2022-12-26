@@ -3,7 +3,6 @@ const path = require('path');
 
 const contactsPath = path.resolve(__dirname, './db/contacts.json');
 
-// TODO: задокументувати кожну функцію
 async function listContacts() {
     const dbRaw = await fs.readFile(contactsPath, 'utf8');
     const db = JSON.parse(dbRaw);
@@ -18,7 +17,7 @@ async function writeDb(db) {
 async function getContactById(contactId) {
     const contacts = await listContacts();
     const filtredContact = contacts.filter((contacts) => contacts.id === contactId);
-
+    return filtredContact;
 }
 
 async function removeContact(contactId) {
